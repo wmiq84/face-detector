@@ -80,8 +80,29 @@ class FaceDetector {
         console.log(cheeksWidth); 
         console.log(jawWidth); 
         console.log(faceLength);
+
+        const faceShape = this.calculateFaceShape(foreHeadwidth, cheeksWidth, jawWidth, faceLength);
+        console.log(faceShape);
     }
-}
+
+    calculateFaceShape(foreheadWidth, cheeksWidth, jawWidth, faceLength) {
+    
+        // Test values: 83.79725060732054 83.09084979929133 83.51359679815036 120.62988338386387
+        if (faceLength > cheeksWidth && cheeksWidth > foreheadWidth && cheeksWidth > jawWidth) {
+          return 'Oval';
+        } else if (foreheadWidth > cheeksWidth && foreheadWidth > jawWidth) {
+          return 'Heart';
+        } else if (jawWidth > foreheadWidth && jawWidth > cheeksWidth) {
+          return 'Square';
+        } else if (cheeksWidth > foreheadWidth && cheeksWidth > jawWidth) {
+          return 'Round';
+        } else if (faceLength > cheeksWidth && cheeksWidth > jawWidth && foreheadWidth > cheeksWidth) {
+          return 'Rectangle';
+        } else {
+          return 'Unknown';
+        }
+      }
+    }
 
 
 const faceDetector = new FaceDetector('video');
